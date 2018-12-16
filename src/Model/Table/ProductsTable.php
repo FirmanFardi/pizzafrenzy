@@ -55,21 +55,21 @@ class ProductsTable extends Table
             ->notEmpty('pname');
 
         $validator
-            ->integer('pquantity')
-            ->requirePresence('pquantity', 'create')
-            ->notEmpty('pquantity');
+            ->integer('pprice')
+            ->requirePresence('pprice', 'create')
+            ->notEmpty('pprice');
+
+        $validator
+            ->scalar('pdescribe')
+            ->maxLength('pdescribe', 255)
+            ->requirePresence('pdescribe', 'create')
+            ->notEmpty('pdescribe');
 
         $validator
             ->scalar('ptopping')
             ->maxLength('ptopping', 255)
             ->requirePresence('ptopping', 'create')
             ->notEmpty('ptopping');
-
-        $validator
-            ->scalar('pcategory')
-            ->maxLength('pcategory', 255)
-            ->requirePresence('pcategory', 'create')
-            ->notEmpty('pcategory');
 
         return $validator;
     }

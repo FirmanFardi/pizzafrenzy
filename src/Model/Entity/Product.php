@@ -8,9 +8,9 @@ use Cake\ORM\Entity;
  *
  * @property int $pid
  * @property string $pname
- * @property int $pquantity
+ * @property int $pprice
+ * @property string $pdescribe
  * @property string $ptopping
- * @property string $pcategory
  */
 class Product extends Entity
 {
@@ -26,8 +26,8 @@ class Product extends Entity
      */
     protected $_accessible = [
         'pname' => true,
-        'pquantity' => true,
-        'ptopping' => true,
-        'pcategory' => true
+        'pprice' => true,
+        'pdescribe' => true,
+        'ptopping' => true
     ];
 }

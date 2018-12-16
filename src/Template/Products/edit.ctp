@@ -22,9 +22,9 @@
         <legend><?= __('Edit Product') ?></legend>
         <?php
             echo $this->Form->control('pname');
-            echo $this->Form->control('pquantity');
+            echo $this->Form->control('pprice');
+            echo $this->Form->control('pdescribe');
             echo $this->Form->control('ptopping');
-            echo $this->Form->control('pcategory');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

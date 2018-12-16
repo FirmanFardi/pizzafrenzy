@@ -2,10 +2,12 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Core\Configure;
+use Cake\ORM\Table;
 /**
  * Products Controller
  *
+ * @property \App\Model\Table\ProductsTable $Products
  *
  * @method \App\Model\Entity\Product[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
@@ -38,6 +40,36 @@ class ProductsController extends AppController
         ]);
 
         $this->set('product', $product);
+    }
+
+        public function list()
+    {
+               $products = $this->paginate($this->Products);
+
+        $this->set(compact('products'));
+    }
+
+    public function temp()
+    {
+        //pegang value crust dgn quantity lepas checkout
+        $pname = $this->request->getData()['pname'];
+        $crust =$this->request->getData()['crust'];
+        $price =$this->request->getData()['pprice'];
+        $quantity =$this->request->getData()['quantity'];
+        $pid = $this->request->getData()['pid'];
+        
+    
+        $_SESSION['pname'] = $pname;
+        $_SESSION['crust'] = $crust;
+        $_SESSION['pprice'] = $price;
+        $_SESSION['quantity'] = $quantity;
+        $_SESSION['pid'] = $pid;
+       
+
+        $this->Flash->success($_COOKIE['pid']);
+
+        return $this->redirect(['controller'=>'Payments','action' => 'add',]);
+
     }
 
     /**
@@ -102,5 +134,8 @@ class ProductsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+        public function isAuthorized($product){
+        return true;
     }
 }

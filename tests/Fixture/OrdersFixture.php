@@ -24,6 +24,9 @@ class OrdersFixture extends TestFixture
         'odate' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'otime' => ['type' => 'time', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'oprice' => ['type' => 'integer', 'length' => 99, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'oquantity' => ['type' => 'integer', 'length' => 99, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'oaddress' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'ocrust' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8mb4_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
             'pfk' => ['type' => 'index', 'columns' => ['pid'], 'length' => []],
             'payfk' => ['type' => 'index', 'columns' => ['payid'], 'length' => []],
@@ -55,9 +58,12 @@ class OrdersFixture extends TestFixture
                 'payid' => 1,
                 'pid' => 1,
                 'uid' => 1,
-                'odate' => '2018-10-08 08:54:51',
-                'otime' => '08:54:51',
-                'oprice' => 1
+                'odate' => '2018-12-04 14:41:40',
+                'otime' => '14:41:40',
+                'oprice' => 1,
+                'oquantity' => 1,
+                'oaddress' => 'Lorem ipsum dolor sit amet',
+                'ocrust' => 'Lorem ipsum dolor sit amet'
             ],
         ];
         parent::init();

@@ -8,6 +8,14 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Users'), ['controller'=>'Users','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Payments'), ['controller'=>'Payments','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Orders'), ['controller'=>'Orders','action' => 'index']) ?></li>
+                        <?php echo 
+                
+        $this->Html->link('Logout',['controller'=>'Users','action'=>'logout'],['class'=>'nav-link']
+      )
+        ?>
     </ul>
 </nav>
 <div class="products index large-9 medium-8 columns content">
@@ -17,9 +25,9 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('pid') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('pname') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('pquantity') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('pprice') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('pdescribe') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('ptopping') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('pcategory') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -28,9 +36,9 @@
             <tr>
                 <td><?= $this->Number->format($product->pid) ?></td>
                 <td><?= h($product->pname) ?></td>
-                <td><?= $this->Number->format($product->pquantity) ?></td>
+                <td><?= $this->Number->format($product->pprice) ?></td>
+                <td><?= h($product->pdescribe) ?></td>
                 <td><?= h($product->ptopping) ?></td>
-                <td><?= h($product->pcategory) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $product->pid]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $product->pid]) ?>

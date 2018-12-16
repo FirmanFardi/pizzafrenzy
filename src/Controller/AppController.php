@@ -67,6 +67,11 @@ class AppController extends Controller
         'unauthorizedRedirect' => $this->referer()
         ]);
 
+        $session_user = $this->Auth->user();
+
+        $this->set('session_user',$session_user);
+        setcookie('test','test');
+
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -75,9 +80,10 @@ class AppController extends Controller
     }
     public function beforeRender(Event $event)
 {
-    $this->viewBuilder()->setTheme('AdminLTE');
 
-    // For CakePHP before 3.5
-    $this->viewBuilder()->theme('AdminLTE');
+}
+public function beforeFilter(Event $event)
+{
+
 }
 }

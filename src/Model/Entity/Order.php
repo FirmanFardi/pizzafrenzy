@@ -13,6 +13,9 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $odate
  * @property \Cake\I18n\FrozenTime $otime
  * @property int $oprice
+ * @property int $oquantity
+ * @property string $oaddress
+ * @property string $ocrust
  */
 class Order extends Entity
 {
@@ -30,8 +33,9 @@ class Order extends Entity
         'payid' => true,
         'pid' => true,
         'uid' => true,
-        'odate' => true,
-        'otime' => true,
-        'oprice' => true
+        'oprice' => true,
+        'oquantity' => true,
+        'oaddress' => true,
+        'ocrust' => true
     ];
 }

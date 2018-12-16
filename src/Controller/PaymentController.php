@@ -55,7 +55,7 @@ class PaymentController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The payment could not be saved. Please, try again.'));
+            $this->Flash->error(__('fail, try again.'));
         }
         $this->set(compact('payment'));
     }

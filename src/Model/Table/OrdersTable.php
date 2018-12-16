@@ -64,19 +64,26 @@ class OrdersTable extends Table
             ->notEmpty('uid');
 
         $validator
-            ->dateTime('odate')
-            ->requirePresence('odate', 'create')
-            ->notEmpty('odate');
-
-        $validator
-            ->time('otime')
-            ->requirePresence('otime', 'create')
-            ->notEmpty('otime');
-
-        $validator
             ->integer('oprice')
             ->requirePresence('oprice', 'create')
             ->notEmpty('oprice');
+
+        $validator
+            ->integer('oquantity')
+            ->requirePresence('oquantity', 'create')
+            ->notEmpty('oquantity');
+
+        $validator
+            ->scalar('oaddress')
+            ->maxLength('oaddress', 255)
+            ->requirePresence('oaddress', 'create')
+            ->notEmpty('oaddress');
+
+        $validator
+            ->scalar('ocrust')
+            ->maxLength('ocrust', 255)
+            ->requirePresence('ocrust', 'create')
+            ->notEmpty('ocrust');
 
         return $validator;
     }

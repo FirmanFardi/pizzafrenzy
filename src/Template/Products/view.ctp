@@ -21,20 +21,20 @@
             <td><?= h($product->pname) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Ptopping') ?></th>
-            <td><?= h($product->ptopping) ?></td>
+            <th scope="row"><?= __('Pdescribe') ?></th>
+            <td><?= h($product->pdescribe) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Pcategory') ?></th>
-            <td><?= h($product->pcategory) ?></td>
+            <th scope="row"><?= __('Ptopping') ?></th>
+            <td><?= h($product->ptopping) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Pid') ?></th>
             <td><?= $this->Number->format($product->pid) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Pquantity') ?></th>
-            <td><?= $this->Number->format($product->pquantity) ?></td>
+            <th scope="row"><?= __('Pprice') ?></th>
+            <td><?= $this->Number->format($product->pprice) ?></td>
         </tr>
     </table>
 </div>

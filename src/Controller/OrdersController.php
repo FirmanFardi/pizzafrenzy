@@ -2,7 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Core\Configure;
+use Cake\ORM\Table;
 /**
  * Orders Controller
  *
@@ -48,18 +49,43 @@ class OrdersController extends AppController
      */
     public function add()
     {
+
+        //dia readykan semua column order utk masukkan data
         $order = $this->Orders->newEntity();
+
+        //masukkan data dlm column ($order dah masuk orders table)
         if ($this->request->is('post')) {
             $order = $this->Orders->patchEntity($order, $this->request->getData());
-            if ($this->Orders->save($order)) {
-                $this->Flash->success(__('The order has been saved.'));
+            //order table access uid masukkan nilai uid
+       
 
-                return $this->redirect(['action' => 'index']);
+            $pid=$_SESSION['pid'];
+            $payid=$_SESSION['payid'];
+            $price=$_SESSION['pprice'];
+            $crust=$_SESSION['crust'];
+            $quantity=$_SESSION['quantity'];
+            $total=$price*$quantity;
+
+            
+                     $order->uid = $this->Auth->user('uid');
+                     $order->pid = $pid;
+                     $order->payid= $payid;
+                     $order->oquantity = $quantity;
+                     $order->ocrust = (String)$crust;
+                     $order->oprice = $total;
+
+
+            if ($this->Orders->save($order)) {
+                
+                return $this->redirect(['action' => 'complete']);
             }
+               
             $this->Flash->error(__('The order could not be saved. Please, try again.'));
         }
         $this->set(compact('order'));
     }
+
+
 
     /**
      * Edit method
@@ -75,6 +101,8 @@ class OrdersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $order = $this->Orders->patchEntity($order, $this->request->getData());
+            $order->uid = $this->Auth->user('uid');
+            $order->pid = Configure::read('pid');
             if ($this->Orders->save($order)) {
                 $this->Flash->success(__('The order has been saved.'));
 
@@ -104,4 +132,11 @@ class OrdersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+       public function isAuthorized($order){
+        return true;
+    }
+
+    public function complete()
+    {}
 }

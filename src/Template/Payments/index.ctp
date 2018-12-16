@@ -8,6 +8,14 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Payment'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Users'), ['controller'=>'Users','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Products'), ['controller'=>'Products','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Orders'), ['controller'=>'Orders','action' => 'index']) ?></li>
+                        <?php echo 
+                
+        $this->Html->link('Logout',['controller'=>'Users','action'=>'logout'],['class'=>'nav-link']
+      )
+        ?>
     </ul>
 </nav>
 <div class="payments index large-9 medium-8 columns content">

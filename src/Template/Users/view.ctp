@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
+
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -54,3 +55,13 @@
         </tr>
     </table>
 </div>
+
+
+
+<?= $this->Html->script('jquery.js') ?>
+<script>
+
+        $(document).ready(function () {
+        alert('JQuery is succesfully included');
+    });
+</script>

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
 
 /**
  * Users Controller
@@ -41,6 +42,8 @@ class UsersController extends AppController
         $this->set('user', $user);
     }
 
+
+
     /**
      * Add method
      *
@@ -51,12 +54,19 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            
+
+            $urole = $this->request->getData()['urole'];
+            $_SESSION['urole'] = $urole;
+            $user->urole =$_SESSION['urole'];
+
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'login']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('fail. Please, try again.'));
         }
         $this->set(compact('user'));
     }
@@ -121,9 +131,21 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
 
             if($user){
+
+
+                
                 $this->Auth->setUser($user);
+
+                   if($user['urole']== 1)
+                   {
+                    return $this->redirect($this->Auth->redirectUrl('/users/'));
+                   }
+                   else if($user['urole']== 2)
+                     {
+                    return $this->redirect($this->Auth->redirectUrl());
+                   }
                 //kalau ade akan redirect page user nak pergi
-                return $this->redirect($this->Auth->redirectUrl());
+                
 
             }
             $this->Flash->error('Your username or password in incorrect');
@@ -138,6 +160,29 @@ class UsersController extends AppController
     public function isAuthorized($user){
         return true;
     }
+
+     public function search()
+    {
+        $this->request->allowMethod('ajax');
+   
+        $keyword = $this->request->query('keyword');
+        $query = $this->Users->find('all',[
+              'conditions' => ['uname LIKE'=>'%'.$keyword.'%','urole'=>'1'],
+              'order' => ['Users.uid'=>'DESC'],
+              'limit' => 10
+        ]);
+        $this->set('users', $this->paginate($query));
+        $this->set('_serialize', ['users']);
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['add']);
+    }
+
+
+        
 
 
 

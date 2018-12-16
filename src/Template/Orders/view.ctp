@@ -17,6 +17,14 @@
     <h3><?= h($order->oid) ?></h3>
     <table class="vertical-table">
         <tr>
+            <th scope="row"><?= __('Oaddress') ?></th>
+            <td><?= h($order->oaddress) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Ocrust') ?></th>
+            <td><?= h($order->ocrust) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Oid') ?></th>
             <td><?= $this->Number->format($order->oid) ?></td>
         </tr>
@@ -37,12 +45,8 @@
             <td><?= $this->Number->format($order->oprice) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Odate') ?></th>
-            <td><?= h($order->odate) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Otime') ?></th>
-            <td><?= h($order->otime) ?></td>
+            <th scope="row"><?= __('Oquantity') ?></th>
+            <td><?= $this->Number->format($order->oquantity) ?></td>
         </tr>
     </table>
 </div>

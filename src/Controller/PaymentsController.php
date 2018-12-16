@@ -48,16 +48,41 @@ class PaymentsController extends AppController
     public function add()
     {
         $payment = $this->Payments->newEntity();
+
+        
         if ($this->request->is('post')) {
             $payment = $this->Payments->patchEntity($payment, $this->request->getData());
-            if ($this->Payments->save($payment)) {
-                $this->Flash->success(__('The payment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+            $paymethod =$this->request->getData()['paymethod'];
+            $_SESSION['paymethod'] = $paymethod;
+        
+            if ($this->Payments->save($payment)) {
+                echo ('succesfully');
+                 $payid =$this->request->getData()['payid'];
+                 $_SESSION['payid'] = $payment->payid;
+                 $this->Flash->success(__('The payment has been saved.'));
+
+                 
+                return $this->redirect(['controller'=>'Orders','action' => 'add']);
             }
-            $this->Flash->error(__('The payment could not be saved. Please, try again.'));
+            $this->Flash->error(__('fail. Please, try again.'));
         }
         $this->set(compact('payment'));
+    }
+
+        public function temp()
+    {
+        //pegang value crust dgn quantity lepas checkout
+        $method =$this->request->getData()['pay'];
+
+   
+        $_SESSION['paymethod'] = $method;
+
+
+        $this->Flash->success($_COOKIE['pid']);
+
+        return $this->redirect(['controller'=>'Orders','action' => 'add',]);
+
     }
 
     /**
@@ -77,7 +102,7 @@ class PaymentsController extends AppController
             if ($this->Payments->save($payment)) {
                 $this->Flash->success(__('The payment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'Payments','action' => 'view']);
             }
             $this->Flash->error(__('The payment could not be saved. Please, try again.'));
         }
@@ -102,5 +127,13 @@ class PaymentsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+           public function isAuthorized($payment){
+        return true;
+    }
+
+    public function addPay()
+    {
+        return $this->redirect(['controller'=>'Orders','action' => 'add']);
     }
 }

@@ -4,14 +4,29 @@
  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
+    <?= $this->Html->css('base.css') ?>
+    <?= $this->Html->css('style.css') ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Products'), ['controller'=>'Products','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Payments'), ['controller'=>'Payments','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Orders'), ['controller'=>'Orders','action' => 'index']) ?></li>
+                        <?php echo 
+                
+        $this->Html->link('Logout',['controller'=>'Users','action'=>'logout'],['class'=>'nav-link']
+      )
+        ?>
     </ul>
 </nav>
 <div class="users index large-9 medium-8 columns content">
     <h3><?= __('Users') ?></h3>
+<div class="table-content">
+    
+    <h3>SEARCH ADMIN</h3>
+    <?= $this->form->control('search');?>
+
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -48,6 +63,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
@@ -58,4 +74,26 @@
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
     </div>
+    </div>
 </div>
+
+<script>
+    $('document').ready(function(){
+         $('#search').keyup(function(){
+            var searchkey = $(this).val();
+            searchTags( searchkey );
+         });
+        function searchTags( keyword ){
+        var data = keyword;
+        $.ajax({
+                    method: 'get',
+                    url : "<?php echo $this->Url->build( [ 'controller' => 'Users', 'action' => 'Search' ] ); ?>",
+                    data: {keyword:data},
+                    success: function( response )
+                    {       
+                       $( '.table-content' ).html(response);
+                    }
+                });
+        };
+    });
+</script>

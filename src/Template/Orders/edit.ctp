@@ -24,9 +24,10 @@
             echo $this->Form->control('payid');
             echo $this->Form->control('pid');
             echo $this->Form->control('uid');
-            echo $this->Form->control('odate');
-            echo $this->Form->control('otime');
             echo $this->Form->control('oprice');
+            echo $this->Form->control('oquantity');
+            echo $this->Form->control('oaddress');
+            echo $this->Form->control('ocrust');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

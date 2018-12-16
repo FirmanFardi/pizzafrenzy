@@ -8,6 +8,14 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Order'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('Users'), ['controller'=>'Users','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Products'), ['controller'=>'Products','action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('Payments'), ['controller'=>'Payments','action' => 'index']) ?></li>
+                <?php echo 
+                
+        $this->Html->link('Logout',['controller'=>'Users','action'=>'logout'],['class'=>'nav-link']
+      )
+        ?>
     </ul>
 </nav>
 <div class="orders index large-9 medium-8 columns content">
@@ -19,9 +27,10 @@
                 <th scope="col"><?= $this->Paginator->sort('payid') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('pid') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('uid') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('odate') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('otime') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('oprice') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('oquantity') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('oaddress') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('ocrust') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -32,9 +41,10 @@
                 <td><?= $this->Number->format($order->payid) ?></td>
                 <td><?= $this->Number->format($order->pid) ?></td>
                 <td><?= $this->Number->format($order->uid) ?></td>
-                <td><?= h($order->odate) ?></td>
-                <td><?= h($order->otime) ?></td>
                 <td><?= $this->Number->format($order->oprice) ?></td>
+                <td><?= $this->Number->format($order->oquantity) ?></td>
+                <td><?= h($order->oaddress) ?></td>
+                <td><?= h($order->ocrust) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $order->oid]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $order->oid]) ?>
